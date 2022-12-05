@@ -4,4 +4,5 @@
 * [Day 02](./src/aoc/day02.clj)
 * [Day 03](./src/aoc/day03.clj)
 * [Day 04](./src/aoc/day04.clj)
+* [Day 05](./src/aoc/day05.clj)
 
