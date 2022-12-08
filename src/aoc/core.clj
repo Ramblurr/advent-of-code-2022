@@ -66,3 +66,12 @@
   [& xs]
   (into []
         (apply concat xs)))
+
+(defn to-matrix
+  "Read a grid of characters into a 2 dimensional matrix"
+  [raw]
+  (into []
+        (for [line raw]
+          (into []
+                (for [char line]
+                  (parse-long (str char)))))))
