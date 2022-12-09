@@ -1,4 +1,4 @@
-(ns day-01
+(ns aoc.2022.day01
   (:require [aoc.core :refer [read-input map-all reduce-all]]
             [medley.core :as m]
             [clojure.string :as str]))

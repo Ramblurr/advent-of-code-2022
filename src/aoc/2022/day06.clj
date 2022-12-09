@@ -1,4 +1,4 @@
-(ns day06
+(ns aoc.2022.day06
   (:require
    [aoc.core :refer [read-input-lines]]))
 

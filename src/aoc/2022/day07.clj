@@ -1,4 +1,4 @@
-(ns day07
+(ns aoc.2022.day07
   (:require
    [clojure.walk :refer [prewalk]]
    [aoc.core :refer [read-input]]))

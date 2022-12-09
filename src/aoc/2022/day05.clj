@@ -1,4 +1,4 @@
-(ns day05
+(ns aoc.2022.day05
   (:require
    [aoc.core :refer [concatv peek-n pop-n pull-ints read-input third to-indexed-map transpose]]
    [clojure.string :as str]

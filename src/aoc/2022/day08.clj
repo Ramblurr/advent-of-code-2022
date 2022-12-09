@@ -1,4 +1,4 @@
-(ns day08
+(ns aoc.2022.day08
   (:require
    [aoc.grid :as grid]
    [aoc.core :refer [read-input-lines map-all]]
