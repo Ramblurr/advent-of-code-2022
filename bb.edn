@@ -25,4 +25,6 @@
          test     {:doc  "Run test suite, skipping those with 'slow' metadata."
                    :task (clojure "-M:test -m kaocha.runner --skip-meta :slow ")}
          test-all {:doc  "Run all tests."
-                   :task (clojure "-M:test -m kaocha.runner")}}}
+                   :task (clojure "-M:test -m kaocha.runner")}
+         ci       {:doc "Run the ci!"
+                   :task (clojure "-M:test -m kaocha.runner --skip-meta :slow --plugin cloverage --codecov")}}}

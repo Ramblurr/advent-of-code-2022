@@ -4,6 +4,8 @@
 
 ![2022](img/2022.svg)
 
+![codecov](https://codecov.io/gh/Ramblurr/advent-of-code/branch/main/graph/badge.svg) ![ci](https://github.com/ramblurr/advent-of-code/actions/workflows/workflow.yml/badge.svg)
+
 ## 2022
 
 * [Day 01](./src/aoc/2022/day01.clj)
