@@ -7,6 +7,6 @@
   (clerk/serve! {:browse? true})
   (clerk/halt!)
 
-  (clerk/show! "src/aoc/day01.clj")
+  (clerk/show! "src/aoc/2022/day01.clj")
   ;;
   )
