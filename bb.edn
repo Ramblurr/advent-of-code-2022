@@ -22,6 +22,8 @@
                    :task (exec 'tasks/submit)}
          template {:doc  "Create src & test templates for -y YYYY -d D, default today."
                    :task (exec 'tasks/template-day)}
+         new-year {:doc "Create folders for a new year"
+                   :task (exec 'tasks/new-year)}
          test     {:doc  "Run test suite, skipping those with 'slow' metadata."
                    :task (clojure "-M:test -m kaocha.runner --skip-meta :slow ")}
          test-all {:doc  "Run all tests."

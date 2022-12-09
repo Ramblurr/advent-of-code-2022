@@ -121,3 +121,9 @@
       (prn resp);; temporary to debug in case this monster parse hack fails
       (println "-------")
       (println result))))
+
+(defn new-year
+  [{:keys [y]}]
+  (sh "mkdir" (format "src/aoc/%d" y))
+  (sh "mkdir" (format "resources/%d" y))
+  (sh "mkdir" (format "test/aoc/%d" y)))
