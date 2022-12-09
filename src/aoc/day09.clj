@@ -3,20 +3,12 @@
    [aoc.core :refer [read-input-lines]]
    [aoc.grid :as grid]
    [clojure.core.matrix :as matrix]
-   [clojure.math :as math]
-   [clojure.set :as set]))
+   [clojure.math :as math]))
 
 (defn visit [g kw pos]
   (-> g
       (assoc-in [pos kw] true)
       (assoc kw pos)))
-
-(defn knot-touching? [head tail]
-  (let [adjs (set/union
-              (set [head])
-              (set (grid/adjacent-diagonal head))
-              (set (grid/adjacent-cardinal head)))]
-    (contains? adjs tail)))
 
 (defn step-towards [g head tail]
   (let [head-pos (get g head)
@@ -25,7 +17,7 @@
     (visit g tail step)))
 
 (defn knot-catchup [g knot prev-knot]
-  (if (knot-touching? (get g prev-knot) (get g knot))
+  (if (grid/adjacent? :compass-self (get g prev-knot) (get g knot))
     g
     (step-towards g prev-knot knot)))
 

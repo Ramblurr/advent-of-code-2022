@@ -7,6 +7,8 @@
   "Parse a two-dimensional grid of single digit numbers into a map structure.
   The keys are the [x y] coordinates and the values are the value at that coord
   The top left is [0 0]. The bottom right is [col-n row-n].
+
+  See AOC 2022 Day 08 input as an example.
   "
   [raw]
   (->>
@@ -17,35 +19,95 @@
              (reduce (fn [g [x y v]]
                        (assoc g [x y] v)) g row)) {})))
 
-(def compass {:north [0 -1]
-              :east [1 0]
-              :south [0 1]
-              :west [-1 0]})
+(def cardinals
+  "The four cardinal directions"
+  [:north :east :south :west])
+(def cardinal->delta
+  "Given an cardinal direction, returns the cartesian coord delta to take one unit step in that direction"
+  {:north [0 -1]
+   :east  [1 0]
+   :south [0 1]
+   :west  [-1 0]})
 
-(def compass-diag
+(def ordinals
+  "The four ordinal directions"
+  [:northeast :northwest :southeast :southwest])
+
+(def ordinal->delta
+  "Given an ordinal direction, returns the cartesian coord delta to take one unit step in that direction"
   {:northeast [1 -1]
    :northwest [-1 -1]
    :southeast [1 1]
    :southwest [-1 1]})
 
-(defn adjacent-cardinal [pos]
-  (->> (vals compass)
+(def compass->delta
+  "Given a cardinal or ordinal direction, returns the cartesian coord delta to take one unit step in that direction"
+  (merge cardinal->delta ordinal->delta))
+
+(defn adjacent-cardinal
+  "Returns the coordinates that are :east, :west, :north, and :south
+  of the given cartesian coord."
+  [pos]
+  (->> (vals cardinal->delta)
        (map #(matrix/add % pos))))
 
-(defn adjacent-diagonal [pos]
-  (->> (vals compass-diag)
+(defn adjacent-cardinal-self
+  "Returns the 5 coords that are cardinally adjacent to
+  the given cartesian coord, including the point itself."
+  [pos]
+  (conj (adjacent-cardinal pos) pos))
+
+(defn adjacent-ordinal
+  "Returns the coordinates that are :north[east|west] and :south[east|west]
+  of the given cartesian coord."
+  [pos]
+  (->> (vals ordinal->delta)
        (map #(matrix/add % pos))))
 
-(defn neighbors
-  "Get all neigbors of pos in a direction"
+(defn adjacent-compass
+  "Returns the coords that are cardinally and ordinally adjacent to
+  the given cartesian coord."
+  [pos]
+  (concat (adjacent-ordinal pos) (adjacent-cardinal pos)))
+
+(defn adjacent-compass-self
+  "Returns the 9 coords that are cardinally and ordinally adjacent to
+  the given cartesian coord, including the point itself."
+  [pos]
+  (conj (adjacent-compass pos) pos))
+
+(defn adjacent?
+  "Returns true if coord is adjacent to the reference coordinate. The definition of adjacent
+  is given by the adjaceny type, one of:
+          :cardinal      - see adjacent-cardinal
+          :ordinal       - see adjacent-ordinal
+          :compass       - see adjacent-compass
+          :compass-self  - see adjacent-compass-self
+          :cardinal-self - see adjacent-cardinal-self"
+  [adjacency-type reference-coord coord]
+  (let [adjacency-set
+        (case adjacency-type
+          :cardinal      (adjacent-cardinal reference-coord)
+          :ordinal       (adjacent-ordinal     reference-coord)
+          :compass       (adjacent-compass reference-coord)
+          :compass-self  (adjacent-compass-self reference-coord)
+          :cardinal-self (adjacent-cardinal-self reference-coord))]
+    (some #(= coord %) adjacency-set)))
+
+(defn coords-in-dir
+  "Standing on coord pos and looking in direction dir,
+  returns all other grid points in that direction until the end of the grid.
+  Example:
+    (coords-in-dir {[0 0] :a [0 1] :b [0 2] :c} [0 0] :south)
+     => ([0 1] [0 2])
+
+  "
   [g pos dir]
   (->> pos
-       (iterate #(matrix/add % dir))
+       (iterate #(matrix/add % (compass->delta dir)))
        rest
-       (map g)
-       (take-while some?)))
+       (take-while #(contains? g %))))
 
-;; (def updown->cardinal {"R" :east "L" :west "U" :north "D" :south})
 (def updown->cardinal {\R :east \L :west \U :north \D :south})
 
 (defn parse-move
@@ -68,7 +130,7 @@
      [[:north 2]]           -> ([0 -1] [0 -1])
      [[:south 1] [:east 1]] -> ([0 1] [1 0])"
   [moves]
-  (mapcat (fn [[dir magnitude]] (repeat magnitude (compass dir))) moves))
+  (mapcat (fn [[dir magnitude]] (repeat magnitude (cardinal->delta dir))) moves))
 
 (defn walk
   "Given a starting coord and a sequence of cartesian delta coords (see step-moves)

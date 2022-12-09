@@ -1,33 +1,34 @@
 (ns day08
   (:require
-   [clojure.core.matrix :as matrix]
-   [aoc.grid :refer [to-grid compass neighbors]]
+   [aoc.grid :as grid]
    [aoc.core :refer [read-input-lines map-all]]
    [medley.core :as m]))
 
-(defn visible? [grid coord]
-  (->> (vals compass)
-       (map #(neighbors grid coord %))
-       (map (fn [neighbors] (every? #(< % (get grid coord)) neighbors)))
-       (some true?)))
+(defn visible? [g coord]
+  (->>  grid/cardinals
+        (map #(grid/coords-in-dir g coord %))
+        (map-all #(get g %))
+        (map (fn [neighbors] (every? #(< % (get g coord)) neighbors)))
+        (some true?)))
 
 (defn part1 [fname]
-  (let [g (to-grid (read-input-lines fname))]
+  (let [g (grid/to-grid (read-input-lines fname))]
     (->> (keys g)
          (map #(visible? g %))
          (filter true?)
          (count))))
 
-(defn scenic-score [grid coord]
-  (->> (vals compass)
-       (map #(neighbors grid coord %))
-       (map-all #(< % (get grid coord)))
+(defn scenic-score [g coord]
+  (->> grid/cardinals
+       (map #(grid/coords-in-dir g coord %))
+       (map-all #(get g %))
+       (map-all #(< % (get g coord)))
        (map #(m/take-upto false? %))
        (map count)
        (apply *)))
 
 (defn part2 [fname]
-  (let [g (to-grid (read-input-lines fname))]
+  (let [g (grid/to-grid (read-input-lines fname))]
     (->> (keys g)
          (map #(scenic-score g %))
          (apply max))))
