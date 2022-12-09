@@ -4,28 +4,12 @@
    [aoc.grid :as grid]
    [clojure.core.matrix :as matrix]
    [clojure.math :as math]
-   [clojure.set :as set]
-   [clojure.string :as str]))
-
-(def directions {"R" :east "L" :west "U" :north "D" :south})
-
-(defn parse-moves [fname]
-  (->> (read-input-lines fname)
-       (map #(str/split % #" "))
-       (mapv (fn [[d c]]
-               [(get directions d)
-                (parse-long c)]))))
+   [clojure.set :as set]))
 
 (defn visit [g kw pos]
   (-> g
       (assoc-in [pos kw] true)
       (assoc kw pos)))
-
-(defn calc-steps [g kw [dir n-steps]]
-  (->> (kw g)
-       (iterate #(matrix/add % (grid/compass dir)))
-       (rest)
-       (take n-steps)))
 
 (defn knot-touching? [head tail]
   (let [adjs (set/union
@@ -52,14 +36,14 @@
        first))
 
 (defn apply-move [g move]
-  (let [head-steps (calc-steps g :head move)]
+  (let [head-steps (grid/walk (get g :head) (grid/step-moves [move]))]
     (reduce (fn [g step]
               (-> g
                   (visit :head step)
                   (move-knots))) g head-steps)))
 
 (defn execute-moves [g moves]
-  (if-let [move (first moves)]
+  (if-let [move (grid/parse-move (first moves))]
     (recur (apply-move g move)
            (rest moves))
     g))
@@ -73,11 +57,12 @@
     (reduce #(visit %1 %2 [0 0]) g knots)))
 
 (defn solve [fname num-knots]
-  (->> (parse-moves fname)
-       (execute-moves (make-grid num-knots))
-       (vals)
-       (filter :tail)
-       count))
+  (->>
+   (read-input-lines fname)
+   (execute-moves (make-grid num-knots))
+   (vals)
+   (filter :tail)
+   count))
 
 (defn part1 [fname]
   (solve fname 2))

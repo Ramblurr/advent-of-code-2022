@@ -75,3 +75,8 @@
           (into []
                 (for [char line]
                   (parse-long (str char)))))))
+
+(defn count-lines
+  "Given a string, count the number of lines."
+  [str]
+  (inc (count (re-find #"\n" str))))

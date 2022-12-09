@@ -1,5 +1,6 @@
 (ns aoc.grid
   (:require
+   [aoc.core :as core]
    [clojure.core.matrix :as matrix]))
 
 (defn to-grid
@@ -43,3 +44,35 @@
        rest
        (map g)
        (take-while some?)))
+
+;; (def updown->cardinal {"R" :east "L" :west "U" :north "D" :south})
+(def updown->cardinal {\R :east \L :west \U :north \D :south})
+
+(defn parse-move
+  "Given a single-line string, transforms it from a U/D/R/L + number direction
+  (with or without whitespace) into a tuple of [direction amount]
+   example:
+    'U1'  -> [:north 1]
+    'S 5' -> [:south 5]
+  "
+  [move]
+  (when move
+    (assert (= 1 (core/count-lines move)) (format "A move must be only a single line. Bad move: %s" move))
+    ((juxt #(get updown->cardinal (first %)) #(first (core/pull-ints %))) move)))
+
+(defn step-moves
+  "Given a sequence of move tuples (see parse-move) returns
+  a sequence of cartesian delta coords.
+  example:
+     []                     -> ()
+     [[:north 2]]           -> ([0 -1] [0 -1])
+     [[:south 1] [:east 1]] -> ([0 1] [1 0])"
+  [moves]
+  (mapcat (fn [[dir magnitude]] (repeat magnitude (compass dir))) moves))
+
+(defn walk
+  "Given a starting coord and a sequence of cartesian delta coords (see step-moves)
+  returns every coord reached along the way (in order)."
+  [start delta-coords]
+  (reductions (partial mapv +)
+              start delta-coords))
