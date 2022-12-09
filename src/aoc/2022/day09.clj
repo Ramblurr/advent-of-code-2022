@@ -62,14 +62,14 @@
 (defn part2 [fname]
   (solve fname 10))
 
-(part1 "day09-sample.txt")
+(part1 "2022/day09-sample.txt")
 ;; => 13
 
-(part1 "day09.txt")
+(part1 "2022/day09.txt")
 ;; => 6464
 
-(part2 "day09-sample2.txt")
+(part2 "2022/day09-sample2.txt")
 ;; => 36
 
-(part2 "day09.txt")
+(part2 "2022/day09.txt")
 ;; => 2604

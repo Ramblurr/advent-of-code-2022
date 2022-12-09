@@ -41,8 +41,8 @@
    (map :prio)
    (reduce +)))
 
-(part1 "day03-sample.txt")
-(part1 "day03.txt")
+(part1 "2022/day03-sample.txt")
+(part1 "2022/day03.txt")
 
 (defn to-set [[g1 g2 g3]]
   {:g1 (into #{} g1)
@@ -64,5 +64,5 @@
    (map :prio)
    (reduce +)))
 
-(part2 "day03-sample.txt")
-(part2 "day03.txt")
+(part2 "2022/day03-sample.txt")
+(part2 "2022/day03.txt")

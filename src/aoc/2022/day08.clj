@@ -33,14 +33,14 @@
          (map #(scenic-score g %))
          (apply max))))
 
-(part1 "day08-sample.txt")
+(part1 "2022/day08-sample.txt")
 ;; => 21
 
-(part1 "day08.txt")
+(part1 "2022/day08.txt")
 ;; => 1807
 
-(part2 "day08-sample.txt")
+(part2 "2022/day08-sample.txt")
 ;; => 8
 
-(part2 "day08.txt")
+(part2 "2022/day08.txt")
 ;; => 480000

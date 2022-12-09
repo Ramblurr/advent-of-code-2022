@@ -21,8 +21,8 @@
    (map (fn [v] (if v 1 0)))
    (reduce +)))
 
-(part1 "day04-sample.txt")
-(part1 "day04.txt")
+(part1 "2022/day04-sample.txt")
+(part1 "2022/day04.txt")
 
 (defn overlaps? [[s1 s2]]
   (seq
@@ -41,5 +41,5 @@
    (map (fn [v] (if v 1 0)))
    (reduce +)))
 
-(part2 "day04-sample.txt")
-(part2 "day04.txt")
+(part2 "2022/day04-sample.txt")
+(part2 "2022/day04.txt")

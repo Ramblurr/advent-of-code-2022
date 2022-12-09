@@ -28,7 +28,7 @@
        first
        (base 4)))
 
-(part1 "day06.txt")
+(part1 "2022/day06.txt")
 ;; => 1300
 
 (defn part2 [fname]
@@ -36,5 +36,5 @@
        first
        (base 14)))
 
-(part2 "day06.txt")
+(part2 "2022/day06.txt")
 ;; => 3986

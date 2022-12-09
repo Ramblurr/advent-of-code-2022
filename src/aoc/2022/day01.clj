@@ -13,9 +13,9 @@
          (reduce-all + 0)
          (apply max))))
 
-(part-1 "day01-sample.txt")
+(part-1 "2022/day01-sample.txt")
 
-(part-1 "day01.txt")
+(part-1 "2022/day01.txt")
 
 (defn part-2 [fname]
   (let [in1 (->
@@ -30,6 +30,6 @@
          (take 3)
          (apply +))))
 
-(part-2 "day01-sample.txt")
-(part-2 "day01.txt")
+(part-2 "2022/day01-sample.txt")
+(part-2 "2022/day01.txt")
 

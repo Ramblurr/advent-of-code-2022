@@ -68,12 +68,12 @@
        (execute :9001)
        report))
 
-(part1 "day05-sample.txt")
-(part1 "day05.txt")
+(part1 "2022/day05-sample.txt")
+(part1 "2022/day05.txt")
 ;; => "WCZTHTMPS"
 
-(part2 "day05-sample.txt")
-(part2 "day05.txt")
+(part2 "2022/day05-sample.txt")
+(part2 "2022/day05.txt")
 ;; => "BLSGJSDTS"
 
 (comment
@@ -89,7 +89,7 @@
     (map #(if (empty? %) :empty (keyword (first %))) column))
 
   (def _s
-    (parse "day05-sample.txt"))
+    (parse "2022/day05-sample.txt"))
   (def _s1
     (exec-order (:stacks _s) (first (:directions _s))))
   (def _s2

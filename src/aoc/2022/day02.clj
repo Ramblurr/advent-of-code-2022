@@ -52,8 +52,8 @@
          (map score-round)
          (reduce +))))
 
-(part-1 "day02-sample.txt")
-(part-1 "day02.txt")
+(part-1 "2022/day02-sample.txt")
+(part-1 "2022/day02.txt")
 
 (def codebook-new {"A" :rock
                    "B" :paper
@@ -86,5 +86,5 @@
          (map score-round-new)
          (reduce +))))
 
-(part-2 "day02-sample.txt")
-(part-2 "day02.txt")
+(part-2 "2022/day02-sample.txt")
+(part-2 "2022/day02.txt")

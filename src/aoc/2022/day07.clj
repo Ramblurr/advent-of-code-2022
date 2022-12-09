@@ -72,12 +72,12 @@
          (apply min))))
 
 (comment
-  (part1 "day07-sample.txt")
+  (part1 "2022/day07-sample.txt")
   ;; => 95437
-  (part1 "day07.txt")
+  (part1 "2022/day07.txt")
   ;; => 1582412
-  (part2 "day07-sample.txt")
+  (part2 "2022/day07-sample.txt")
   ;; => 24933642
-  (part2 "day07.txt")           ;; rcf
+  (part2 "2022/day07.txt")           ;; rcf
   ;; => 3696336
   )
