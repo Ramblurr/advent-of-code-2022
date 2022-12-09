@@ -47,8 +47,8 @@
 (defn- input-url   [y d] (str (problem-url y d) "/input"))
 (defn- answer-url  [y d] (str (problem-url y d) "/answer"))
 
-(defn- source-path [y d] (format "src/aoc/%s/d%s.clj"       y (zero-pad-str d)))
-(defn- test-path   [y d] (format "test/aoc/%s/d%s_test.clj" y (zero-pad-str d)))
+(defn- source-path [y d] (format "src/aoc/%s/day%s.clj"       y (zero-pad-str d)))
+(defn- test-path   [y d] (format "test/aoc/%s/day%s_test.clj" y (zero-pad-str d)))
 (defn- input-path  [y d] (format "resources/%s/day%s.txt"     y (zero-pad-str d)))
 
 (defn template-day
