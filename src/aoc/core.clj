@@ -1,5 +1,6 @@
 (ns aoc.core
   (:require [clojure.java.io :as io]
+            [medley.core :as m]
             [clojure.string :as str]))
 
 (defn read-input
@@ -80,3 +81,10 @@
   "Given a string, count the number of lines."
   [str]
   (inc (count (re-find #"\n" str))))
+
+(defn positions
+  "Returns a lazy sequence containing the positions at which pred
+   is true for items in coll."
+  ;;  https://github.com/clojure/clojure-contrib/blob/4723929c520b1728fec5c50262381f6871da3afd/modules/seq/src/main/clojure/clojure/contrib/seq.clj#L87
+  [pred coll]
+  (for [[idx elt] (m/indexed coll) :when (pred elt)] idx))
