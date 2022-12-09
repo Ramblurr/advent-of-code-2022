@@ -2,3 +2,4 @@
 .cpcache
 .nrepl-port
 NOTES.md
+.env

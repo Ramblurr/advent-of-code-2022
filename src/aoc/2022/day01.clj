@@ -14,8 +14,10 @@
          (apply max))))
 
 (part-1 "2022/day01-sample.txt")
+;; => 24000
 
 (part-1 "2022/day01.txt")
+;; => 67622
 
 (defn part-2 [fname]
   (let [in1 (->
@@ -31,5 +33,7 @@
          (apply +))))
 
 (part-2 "2022/day01-sample.txt")
-(part-2 "2022/day01.txt")
+;; => 45000
 
+(part-2 "2022/day01.txt")
+;; => 201491

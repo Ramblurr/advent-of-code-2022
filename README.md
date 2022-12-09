@@ -1,6 +1,8 @@
 # Advent of Code
 
-Welcome to my Advent of Code solutions in Clojure.
+> Welcome to my Advent of Code solutions in Clojure.
+
+![2022](img/2022.svg)
 
 ## 2022
 
@@ -13,3 +15,8 @@ Welcome to my Advent of Code solutions in Clojure.
 * [Day 07](./src/aoc/2022/day07.clj)
 * [Day 08](./src/aoc/2022/day08.clj)
 * [Day 09](./src/aoc/2022/day09.clj)
+
+
+## Thanks
+
+* Thanks to [@tschady](https://github.com/tschady/) on the Clojurians slack for the babashka tasks
