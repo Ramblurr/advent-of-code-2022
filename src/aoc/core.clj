@@ -1,7 +1,15 @@
 (ns aoc.core
+  (:refer-clojure :exclude [parse-long])
   (:require [clojure.java.io :as io]
             [medley.core :as m]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clojure.core.matrix :as matrix]))
+
+(defn parse-long
+  "Like clojure.core/parse-long but nil puns."
+  [v]
+  (when v
+    (clojure.core/parse-long v)))
 
 (defn read-input
   [day]
