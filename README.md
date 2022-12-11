@@ -17,6 +17,8 @@
 * [Day 07](./src/aoc/2022/day07.clj)
 * [Day 08](./src/aoc/2022/day08.clj)
 * [Day 09](./src/aoc/2022/day09.clj)
+* [Day 10](./src/aoc/2022/day10.clj)
+* [Day 11](./src/aoc/2022/day11.clj)
 
 
 ## Thanks
