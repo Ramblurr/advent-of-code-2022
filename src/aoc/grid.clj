@@ -4,17 +4,18 @@
    [clojure.core.matrix :as matrix]))
 
 (defn to-grid
-  "Parse a two-dimensional grid of single digit numbers into a map structure.
+  "Parse a two-dimensional grid of characters into a map structure.
   The keys are the [x y] coordinates and the values are the value at that coord
   The top left is [0 0]. The bottom right is [col-n row-n].
-
+  parse-cell-fn is a function that is given the value of a cell and returns the value.
+  Input is a sequence of lines in the grid.
   See AOC 2022 Day 08 input as an example.
   "
-  [raw]
+  [raw parse-cell-fn]
   (->>
    (map-indexed (fn [y line]
                   (map-indexed (fn [x char]
-                                 [x y (parse-long (str char))]) line)) raw)
+                                 [x y (parse-cell-fn (str char))]) line)) raw)
    (reduce (fn [g row]
              (reduce (fn [g [x y v]]
                        (assoc g [x y] v)) g row)) {})))

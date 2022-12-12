@@ -12,7 +12,7 @@
         (some true?)))
 
 (defn part1 [fname]
-  (let [g (grid/to-grid (read-input-lines fname))]
+  (let [g (grid/to-grid (read-input-lines fname) parse-long)]
     (->> (keys g)
          (map #(visible? g %))
          (filter true?)
@@ -28,19 +28,21 @@
        (apply *)))
 
 (defn part2 [fname]
-  (let [g (grid/to-grid (read-input-lines fname))]
+  (let [g (grid/to-grid (read-input-lines fname) parse-long)]
     (->> (keys g)
          (map #(scenic-score g %))
          (apply max))))
 
-(part1 "2022/day08-sample.txt")
-;; => 21
+(comment
+  (part1 "2022/day08-sample.txt")
+  ;; => 21
 
-(part1 "2022/day08.txt")
-;; => 1807
+  (part1 "2022/day08.txt")
+  ;; => 1807
 
-(part2 "2022/day08-sample.txt")
-;; => 8
+  (part2 "2022/day08-sample.txt")
+  ;; => 8
 
-(part2 "2022/day08.txt")
-;; => 480000
+  (part2 "2022/day08.txt")
+  ;; => 480000
+  )
