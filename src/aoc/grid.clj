@@ -1,5 +1,6 @@
 (ns aoc.grid
   (:require
+   [medley.core :as m]
    [aoc.core :as core]
    [clojure.core.matrix :as matrix]))
 
@@ -139,3 +140,21 @@
   [start delta-coords]
   (reductions (partial mapv +)
               start delta-coords))
+
+(defn adjacency-graph
+  "Return an adjacency graph (as a map of node -> #{edges}) suitable for use with loom.
+
+    adjacency-fn - the adjacency function (e.g., grid/adjacent-cardinal) that returns adjacent grid cells
+    has-edge?    - a function (graph, from, to) -> bool that indicates if the node from has a directed edge to to.
+    g            - the grid map
+
+  "
+  [adjacency-fn has-edge? g]
+  (m/map-kv-vals (fn [pos _]
+                   (set
+                    (filter some?
+                            (map (fn [neighbor]
+                                   (when (has-edge? g pos neighbor)
+                                     neighbor))
+                                 (adjacency-fn pos)))))
+                 g))
