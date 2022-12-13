@@ -96,3 +96,9 @@
   ;;  https://github.com/clojure/clojure-contrib/blob/4723929c520b1728fec5c50262381f6871da3afd/modules/seq/src/main/clojure/clojure/contrib/seq.clj#L87
   [pred coll]
   (for [[idx elt] (m/indexed coll) :when (pred elt)] idx))
+
+(defn ensure-vector
+  [v]
+  (if (vector? v)
+    v
+    [v]))

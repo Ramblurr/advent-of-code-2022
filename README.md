@@ -20,6 +20,7 @@
 * [Day 10](./src/aoc/2022/day10.clj)
 * [Day 11](./src/aoc/2022/day11.clj)
 * [Day 12](./src/aoc/2022/day12.clj)
+* [Day 13](./src/aoc/2022/day13.clj)
 
 
 ## Thanks
