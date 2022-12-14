@@ -1,8 +1,9 @@
 (ns aoc.grid
   (:require
-   [medley.core :as m]
    [aoc.core :as core]
-   [clojure.core.matrix :as matrix]))
+   [clojure.core.matrix :as matrix]
+   [clojure.string :as str]
+   [medley.core :as m]))
 
 (defn to-grid
   "Parse a two-dimensional grid of characters into a map structure.
@@ -158,3 +159,54 @@
                                      neighbor))
                                  (adjacency-fn pos)))))
                  g))
+
+(defn slope [[x1 y1] [x2 y2]]
+  (assert (not= x1 x2) "Cannot calculate slope of vertical lines")
+  (quot
+   (- y2 y1)
+   (- x2 x1)))
+
+(defn enumerate-line
+  "Given two cartesian coordinates, return a list of all the points along the line"
+  [[x1 y1] [x2 y2]]
+  (cond
+    (= x1 x2) ;; vertical line
+    (for [y (range (min  y1 y2) (inc (max y1 y2)))]
+      [x1 y])
+    (= y1 y2) ;; horizontal line
+    (for [x (range (min x1 x2) (inc (max x1 x2)))]
+      [x y1])
+    :else
+    (let [slope (slope [x1 y1] [x2 y2])
+          b (- y1 (* slope x1))]
+      (for [x (range x1 (inc x2))]
+        [x (+ (* slope x) b)]))))
+
+(defn is-point? [p]
+  (and (vector? p)
+       (= 2 (count p))))
+
+(defn points [g]
+  (->> (keys g)
+       (filter is-point?)))
+
+(defn bounds
+  "Calculate the bounds of the grid. Returns [p1 p2], where p1 is the minimum coord and p2 is the maximum coord"
+  [g]
+  [[(->> (points g) (map first) (apply min))
+    (->> (points g) (map second) (apply min))]
+   [(->> (points g) (map first) (apply max))
+    (->> (points g) (map second) (apply max))]])
+
+(defn render-grid
+  "Returns an ascii representation of the grid.
+     g - the grid map
+     cell-fn - a function to render the given grid cell with form (grid, pos, value) -> str
+  "
+  [g cell-fn]
+  (let [[[x-top y-top] [x-bottom y-bottom]] (bounds g)]
+    (->>
+     (for [y (range y-top (inc y-bottom))]
+       (for [x (range x-top (inc x-bottom))]
+         (cell-fn g [x y] (get g [x y]))))
+     (map #(str/join "" %)))))
