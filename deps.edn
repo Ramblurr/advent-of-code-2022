@@ -2,6 +2,7 @@
            medley/medley               {:mvn/version "1.4.0"}
            net.mikera/core.matrix      {:mvn/version "0.63.0"}
            aysylu/loom                 {:mvn/version "1.0.2"}
+           thi.ng/geom                 {:mvn/version "1.0.0-RC5"}
            io.github.nextjournal/clerk {:mvn/version "0.12.707"}}
  :paths   ["resources/" "src/"]
  :aliases {:dev       {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]}

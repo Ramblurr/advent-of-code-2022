@@ -1,6 +1,7 @@
 (ns aoc.grid
   (:require
    [aoc.core :as core]
+   [clojure.core.matrix.linear :as matrix.linear]
    [clojure.core.matrix :as matrix]
    [clojure.string :as str]
    [medley.core :as m]))
@@ -21,6 +22,13 @@
    (reduce (fn [g row]
              (reduce (fn [g [x y v]]
                        (assoc g [x y] v)) g row)) {})))
+
+(defn insert-with
+  "Given a sequence of cartesian coordinates and a value, inserts all positions into the grid with that value"
+  [g poss value]
+  (m/deep-merge
+   g
+   (zipmap poss (take (count poss) (repeat value)))))
 
 (def cardinals
   "The four cardinal directions"
@@ -210,3 +218,30 @@
        (for [x (range x-top (inc x-bottom))]
          (cell-fn g [x y] (get g [x y]))))
      (map #(str/join "" %)))))
+
+(defn manhattan-dist
+  "Returns the manhattan distance between two cartesian coords."
+  [a b]
+  (-> (matrix/sub a b)
+      (matrix.linear/norm 1)
+      int))
+
+(defn enumerate-distance
+  "Given a cartesian coordinate and a maximum manhattan distance, returns a list of all the coords that are at most d distance away."
+  [[origin-x origin-y] d]
+  (->>
+   (for [x (range (- d) (inc d))]
+     (for [y (range (- d) (inc d))]
+       (when (<=  (+ (abs x) (abs y)) d)
+         [(+ origin-x x) (+ origin-y y)])))
+   (apply concat)
+   (remove nil?)))
+
+(defn manhattan-poly
+  "Given a manhattan distance and point return the corner points at the permimeter of the poly [right left top bottom]"
+  [[origin-x origin-y] distance]
+  (let [top [origin-x (- origin-y distance)]
+        right [(+ origin-x distance) origin-y]
+        bottom [origin-x (+ origin-y distance)]
+        left [(- origin-x distance) origin-y]]
+    [top right bottom left]))

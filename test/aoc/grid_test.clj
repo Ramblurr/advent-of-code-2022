@@ -19,3 +19,7 @@
 (deftest bounds
   (is (= [[0 0] [0 0]] (grid/bounds {[0 0] :_})))
   (is (= [[0 0] [1 1]] (grid/bounds {[0 0] :_ [1 1] :_}))))
+
+(deftest manhattan-poly
+  (is (=  [[8 -2] [17 7] [8 16] [-1 7]]
+          (grid/manhattan-poly [8 7] 9))))

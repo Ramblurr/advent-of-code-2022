@@ -22,6 +22,7 @@
 * [Day 12](./src/aoc/2022/day12.clj)
 * [Day 13](./src/aoc/2022/day13.clj)
 * [Day 14](./src/aoc/2022/day14.clj)
+* [Day 15](./src/aoc/2022/day15.clj)
 
 
 ## Thanks
