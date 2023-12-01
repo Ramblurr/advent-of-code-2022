@@ -4,3 +4,5 @@
 NOTES.md
 .env
 target/
+.clj-kondo
+.lsp

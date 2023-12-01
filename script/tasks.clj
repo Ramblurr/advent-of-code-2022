@@ -13,7 +13,10 @@
 
 (def config (from-env-file ".env"))
 
-(pods/load-pod 'retrogradeorbit/bootleg "0.1.9")
+
+;; (pods/load-pod "bootleg")
+;; 'cause nixos
+(pods/load-pod "bootleg-wrapped")
 
 (require '[pod.retrogradeorbit.bootleg.utils :refer [convert-to]]
          '[pod.retrogradeorbit.hickory.select :as s])

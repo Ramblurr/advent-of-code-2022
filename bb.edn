@@ -1,7 +1,7 @@
 {:deps {local/deps {:local/root "."}
         cprop/cprop {:mvn/version "0.1.19"}}
  :paths ["resources" "script"]
- :tasks {repl  (shell "clojure -A:dev -A:test -M:inspect/reveal-cider")
+ :tasks {repl-portal  (shell "clojure -A:dev -A:test -M:inspect/portal-cli-cider")
          repl-term  (shell "clojure -A:test -A:dev -M:repl/cider-refactor")
          badges   {:doc  "Updates README badges with latest puzzle completion stats."
                    :task (exec 'tasks/update-badges)}
