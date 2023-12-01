@@ -40,6 +40,14 @@
   (map parse-long
        (re-seq #"(?:(?<!\d)-)?\d+" s)))
 
+(defn pull-digits
+  "Pull all the digits out of the string
+  From: https://github.com/mcpower/adventofcode/blob/52d4b64b777cc76883e4d987f798d80e37a792f4/utils.py#L56
+  "
+  [s]
+  (map parse-long
+       (re-seq #"\d" s)))
+
 (defn transpose
   "Transpose a list of lists"
   [coll]
@@ -102,3 +110,12 @@
   (if (vector? v)
     v
     [v]))
+
+(defn re-pos
+  "Returns a map of the positions of the matches of re in s"
+  [re s]
+  (loop [m (re-matcher re s)
+         res {}]
+    (if (.find m)
+      (recur m (assoc res (.start m) (.group m)))
+      res)))
