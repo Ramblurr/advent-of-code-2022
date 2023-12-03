@@ -23,6 +23,15 @@
              (reduce (fn [g [x y v]]
                        (assoc g [x y] v)) g row)) {})))
 
+
+(defn grid-size
+  "Returns the size of the grid as [width height]"
+  [g]
+  (reduce (fn [[width height] [x y]]
+            [(max width (inc x)) (max height (inc y))])
+          [0 0]
+          (keys g)))
+
 (defn insert-with
   "Given a sequence of cartesian coordinates and a value, inserts all positions into the grid with that value"
   [g poss value]
