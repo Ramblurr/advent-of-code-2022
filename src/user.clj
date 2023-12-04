@@ -18,5 +18,7 @@
   (clerk/halt!)
 
   (clerk/show! "src/aoc/2022/day01.clj")
+
+  (go)
   ;;
   )

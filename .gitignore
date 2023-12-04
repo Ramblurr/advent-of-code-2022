@@ -6,3 +6,4 @@ NOTES.md
 target/
 .clj-kondo
 .lsp
+.portal

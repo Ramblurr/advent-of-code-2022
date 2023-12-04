@@ -13,12 +13,6 @@
    (map #(Long/parseLong %))
    (reduce +)))
 
-(part-1 "2023/day01-sample.txt")        ;; rcf
-;; => 142
-
-(part-1 "2023/day01.txt") ;; rcf
-;; => 55108
-
 (def digits #{"0" "1" "2" "3" "4" "5" "6" "7" "8" "9"
               "one" "two" "three" "four" "five" "six" "seven" "eight" "nine" "zero"})
 
@@ -46,8 +40,16 @@
    (map #(Long/parseLong %))
    (reduce +)))
 
-(part-2 "2023/day01-sample2.txt")        ;; rcf
-;; => 281
+(comment
+  (part-1 "2023/day01-sample.txt") ;; rcf
+  ;; => 142
 
-(part-2 "2023/day01.txt")        ;; rcf
-;; => 56324
+  (part-1 "2023/day01.txt") ;; rcf
+  ;; => 55108
+
+  (part-2 "2023/day01-sample2.txt") ;; rcf
+  ;; => 281
+
+  (part-2 "2023/day01.txt") ;; rcf
+  ;; => 56324
+  )

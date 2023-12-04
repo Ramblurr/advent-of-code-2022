@@ -69,11 +69,6 @@
        vals
        (reduce +)))
 
-(part-1 "2023/day03-sample.txt")
-;; => 4361
-(part-1 "2023/day03.txt")
-;; => 512794
-
 (defn part-2 [fname]
   (->>
    (read-grid fname)
@@ -84,8 +79,16 @@
    (map #(apply * (vals %)))
    (reduce +)))
 
-(part-2 "2023/day03-sample.txt")
-;; => 467835
+(comment
 
-(part-2 "2023/day03.txt")
-;; => 67779080
+  (part-1 "2023/day03-sample.txt")
+  ;; => 4361
+  (part-1 "2023/day03.txt")
+  ;; => 512794
+
+  (part-2 "2023/day03-sample.txt")
+  ;; => 467835
+
+  (part-2 "2023/day03.txt")
+  ;; => 67779080
+  )
