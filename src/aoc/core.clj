@@ -33,7 +33,7 @@
   (map (fn [v] (reduce f val v)) coll))
 
 (defn pull-ints
-  "Pull all the intgers out of the string
+  "Pull all the integers out of the string
   From: https://github.com/mcpower/adventofcode/blob/52d4b64b777cc76883e4d987f798d80e37a792f4/utils.py#L56
   "
   [s]
