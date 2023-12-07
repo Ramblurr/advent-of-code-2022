@@ -15,6 +15,7 @@
 * [Day 04](./src/aoc/2023/day04.clj)
 * [Day 05](./src/aoc/2023/day05.clj)
 * [Day 06](./src/aoc/2023/day06.clj)
+* [Day 07](./src/aoc/2023/day07.clj)
 
 ## 2022
 
